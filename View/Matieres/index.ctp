@@ -72,7 +72,7 @@
 						<?php $tab = array('MAT997'=>'', 'MAT998' =>'', 'MAT999'=>'') ;?>
 						<?php foreach ($liste_matiere as $matiere): ;?>
 							<tr>
-								<td class="insert">
+								<td class="insert" style="cursor: pointer;">
 									<?php echo $this->Html->image('../img/Add.ico',
 									array('width'=> 15, 'height'=> 15)); ?>
 								</td>
@@ -107,7 +107,7 @@
 		<button type="button" class="btn btn-primary" id="add_insert">Valider</button>
 	</div>
 
-	<script type="text/javascript">
+	<script type="text/javascript" charset="utf8">
 		$(document).ready(function(){
 						//Insertion
 			$('#insert_mat_dialogue').dialog({autoOpen: false});
@@ -127,7 +127,7 @@
 							libelle_mat: $('#libele_insert').val()
 
 						}, function(data){
-							alert(data);
+							alert(data.replace('\\u00e8', 'è'));
 							window.location.replace('<?php echo $this->request->base; ?>/Matieres/index');	
 					});
 
