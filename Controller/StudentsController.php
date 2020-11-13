@@ -149,6 +149,7 @@
 						]);
 						if($this->Student->validates()) {
 								if($this->Student->save())$count++;
+								$this->Student->clear();
 						}
 						else $error[] = $num_matricule;
 				}

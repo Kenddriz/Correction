@@ -22,9 +22,11 @@ class PromotionsController extends AppController
 			$this->request->data['Promotion']['num_matricule'] .= $this->request->data['Promotion']['sexe'];
 			$this->request->data['Promotion']['des_classe'] = $des_classe;
 			$this->request->data['Promotion']['code_section'] = $code_section;
+
 			$this->Promotion->create($this->request->data);
 
 			if($this->Promotion->validates()) {
+
 				if(!empty($this->Section->find('first',[
 				'conditions'=>[
 					'des_classe'=>$des_classe,
@@ -64,6 +66,7 @@ class PromotionsController extends AppController
 				//Refresh
 				//header("Refresh:2");
 			}
+
 		}
 		 $this->set('page_recherche', $this->defaultPaginator());
 		 $this->set('selects', $this->getSelect());
@@ -168,7 +171,10 @@ class PromotionsController extends AppController
 					$info_eleve=$this->Student->getEleveInfosTout($matricule,
 							$this->request->data['Promotion']['des_annee_scolaire']
 						);
-					if(empty($info_eleve))if($this->Promotion->save())$count++;
+					if(empty($info_eleve)){
+							if($this->Promotion->save())$count++;
+							$this->Promotion->clear();
+						}
 					}
 					else $eleve_non_existe[] = $matricule;
 
